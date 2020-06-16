@@ -9,11 +9,11 @@ Please see LICENSE for full license.
 from cx_Freeze import setup, Executable
 import sys
 import shutil
-import decapitalizer
+
 import os
 import importlib
 import idealab_tools.setup_tools as st
-
+sys.path.append('./python')
 
 shutil.rmtree("build", ignore_errors=True)
 shutil.rmtree("dist", ignore_errors=True)
@@ -21,7 +21,6 @@ shutil.rmtree('decapitalizer.egg-info', ignore_errors=True)
 
 packages = []
 packages.append('decapitalizer')
-#packages.append('Qt5')
 
 package_data = {}
 package_data['decapitalizer'] = ['files/*']
@@ -57,9 +56,14 @@ zip_includes = []
 include_files = []
 include_files.extend(st.include_entire_directory(st.fix(st.python_installed_directory,'Library/plugins/platforms'),''))
 #include_files.extend(st.include_entire_directory(st.fix(st.python_installed_directory,'Library/bin'),''))
-include_files.append((st.fix(st.python_installed_directory,'Library/bin/Qt5Widgets.dll'),'Library/bin/Qt5Widgets.dll'))
-include_files.append((st.fix(st.python_installed_directory,'Library/bin/Qt5Core.dll'),'Library/bin/Qt5Core.dll'))
-include_files.append((st.fix(st.python_installed_directory,'Library/bin/Qt5Gui.dll'),'Library/bin/Qt5Gui.dll'))
+# regular python
+# include_files.append((st.fix(st.python_installed_directory,'Library/bin/Qt5Widgets.dll'),'Library/bin/Qt5Widgets.dll'))
+# include_files.append((st.fix(st.python_installed_directory,'Library/bin/Qt5Core.dll'),'Library/bin/Qt5Core.dll'))
+# include_files.append((st.fix(st.python_installed_directory,'Library/bin/Qt5Gui.dll'),'Library/bin/Qt5Gui.dll'))
+#anaconda python
+include_files.append((st.fix(st.python_installed_directory,'Library/bin/Qt5Widgets_conda.dll'),'Library/bin/Qt5Widgets_conda.dll'))
+include_files.append((st.fix(st.python_installed_directory,'Library/bin/Qt5Core_conda.dll'),'Library/bin/Qt5Core_conda.dll'))
+include_files.append((st.fix(st.python_installed_directory,'Library/bin/Qt5Gui_conda.dll'),'Library/bin/Qt5Gui_conda.dll'))
 
 build_exe_options = {}
 build_exe_options['packages']=packages
@@ -101,15 +105,15 @@ setup_kwargs = {}
 setup_kwargs['name']='decapitalizer'
 setup_kwargs['version']='0.0.1'
 setup_kwargs['classifiers']=['Programming Language :: Python','Programming Language :: Python :: 3']   
-setup_kwargs['description']='Empty QT Project developed by the IDEAlab.'
+setup_kwargs['description']='Empty QT Project developed by Dan Aukes.'
 setup_kwargs['author']='Dan Aukes'
 setup_kwargs['author_email']='danaukes@gmail.com'
-#setup_kwargs['url']='https://github.com/idealabasu/code_idealab_tools.git'
+setup_kwargs['url']=''
 setup_kwargs['license']='MIT'
 setup_kwargs['packages']=packages
 setup_kwargs['package_dir']={'decapitalizer' : 'python/decapitalizer'}
 setup_kwargs['package_data'] = package_data
-#setup_kwargs['install_requires']=[]
+setup_kwargs['install_requires']=[]
 setup_kwargs['options'] = setup_options
 setup_kwargs['executables'] = [exe]
 
