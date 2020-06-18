@@ -77,6 +77,9 @@ bdist_msi_options = {}
 #import uuid
 #bdist_msi_options['upgrade_code']= str(uuid.uuid4())
 bdist_msi_options['upgrade_code']= '6576a015-5ff7-4cf8-bc8c-297b139cf5ae'
+#bdist_msi_options['add_to_path']= True
+#bdist_msi_options['environment_variables']=  [("E_MYAPP_VAR", "=-*MYAPP_VAR", "1", "TARGETDIR")]
+
 
 exe = Executable(
    # what to build
